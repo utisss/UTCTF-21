@@ -1,0 +1,9 @@
+version: "3.3"
+services:
+  osint:
+    build:
+      context: .
+    deploy:
+      replicas: 1
+    ports:
+      - "8756:80"
