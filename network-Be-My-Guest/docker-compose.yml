@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  samba:
+    tty: true
+    networks:
+    - default
+    volumes:
+      - ./Shared:/Shared
+    ports:
+      - "8881:139/tcp"
+      - "8882:445"
+    build:
+      context: .
+      dockerfile: Dockerfile
