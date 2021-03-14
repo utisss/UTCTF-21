@@ -1,0 +1,54 @@
+version: "3.9"
+services:
+  please_thank_you_frontend:
+    build:
+      context: ./frontend
+    container_name: please_thank_you_frontend
+    image: please_thank_you_frontend:latest
+    ports:
+        - "80:80"
+        - "443:443"
+    security_opt:
+      - no-new-privileges:true
+    depends_on:
+      - please_thank_you_backend
+    networks:
+      - backend
+    links:
+      - please_thank_you_backend
+    deploy:
+      resources:
+        limits:
+          cpus: 0.1
+          memory: 256M
+        reservations:
+          memory: 32M
+      restart_policy:
+        condition: on-failure
+        max_attempts: 5
+  please_thank_you_backend:
+    build:
+      context: ./backend
+    container_name: please_thank_you_backend
+    image: please_thank_you_backend:latest
+    environment:
+      - ACCEPTED_DN=CN=psandqs.dangerous-testing.utctf.live
+      - FLAG=utflag{weak_keys_are_dangerous}
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - backend
+    read_only: true
+    deploy:
+      resources:
+        limits:
+          cpus: 0.1
+          memory: 256M
+        reservations:
+          memory: 32M
+      restart_policy:
+        condition: on-failure
+        max_attempts: 5
+networks:
+  backend:
+    name: please_thank_you

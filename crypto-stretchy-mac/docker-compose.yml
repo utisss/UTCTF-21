@@ -1,0 +1,28 @@
+version: "3.9"
+services:
+  stretchy_mac:
+    build:
+      context: .
+    container_name: stretchy_mac
+    image: stretchy_mac:latest
+    ports:
+      - "4358:4358"
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - PORT=4358
+      - TIMEOUT=3600
+      - FLAG=utflag{merkle_damgard_construction}
+      - MINIMUM_KEY_SIZE=16
+      - MAXIMUM_KEY_SIZE=32
+    read_only: true
+    deploy:
+      resources:
+        limits:
+          cpus: 0.2
+          memory: 512M
+        reservations:
+          memory: 64M
+      restart_policy:
+        condition: on-failure
+        max_attempts: 5

@@ -1,0 +1,28 @@
+version: "3.9"
+services:
+  prove_no_knowledge:
+    build:
+      context: .
+    container_name: prove_no_knowledge
+    image: prove_no_knowledge:latest
+    ports:
+      - "4354:4354"
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - PORT=4354
+      - TIMEOUT=300
+      - FLAG=utflag{questions_not_random}
+      - G=2
+      - P=00ac0526168bfed3be9842906e0fef1d06c5b53fdc45d1862445a0bd80d322afd7452e50426f06c21b328f576e681771ca567c21da385a3988c66b64f920297c570ea1573cca6762b97f442a1361ff34d821b8292afc2b5c73d5fafd079247b56bb449d3114bd85116955700a55d423db9fd32da7b375665294225cfeeb64bb63c58f7a9d0c228b8e8b8d59c2f3ff702564b0b398eb64f9fdfb97feea70a3c62c8ad2f08d5411637a502b982a3e5b6aacad3362cbec0336153356cd8d8b3062cf1a0e83d207ae6e4c8b9415a387b066b34a499b9d4483ae30112f22df1afad964339b58c5a0f130f0c5cd8e571ebd0be2c116576893648826a0adfcb27387c3b0b
+    read_only: true
+    deploy:
+      resources:
+        limits:
+          cpus: 0.2
+          memory: 512M
+        reservations:
+          memory: 64M
+      restart_policy:
+        condition: on-failure
+        max_attempts: 5

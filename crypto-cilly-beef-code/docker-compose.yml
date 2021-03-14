@@ -1,0 +1,26 @@
+version: "3.9"
+services:
+  cilly_beef_code:
+    build:
+      context: .
+    container_name: cilly_beef_code
+    image: cilly_beef_code:latest
+    ports:
+      - "4355:4355"
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - PORT=4355
+      - TIMEOUT=300
+      - FLAG=utflag{initialization_vectors_not_random}
+    read_only: true
+    deploy:
+      resources:
+        limits:
+          cpus: 0.2
+          memory: 512M
+        reservations:
+          memory: 64M
+      restart_policy:
+        condition: on-failure
+        max_attempts: 5

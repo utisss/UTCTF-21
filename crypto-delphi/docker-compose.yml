@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  delphi:
+    build:
+      context: .
+    container_name: delphi
+    image: delphi:latest
+    ports:
+      - "4356:4356"
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - PORT=4356
+      - TIMEOUT=30
+      - FLAG=utflag{oracle_padded_oops}
+      - CHALLENGE_BYTES=32
+    read_only: true
+    deploy:
+      resources:
+        limits:
+          cpus: 0.2
+          memory: 512M
+        reservations:
+          memory: 64M
+      restart_policy:
+        condition: on-failure
+        max_attempts: 5
