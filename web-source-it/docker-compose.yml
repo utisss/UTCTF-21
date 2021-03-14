@@ -1,0 +1,9 @@
+version: "3.3"
+services:
+  web-source-it:
+    build:
+      context: .
+    deploy:
+      replicas: 1
+    ports:
+      - "8778:80"

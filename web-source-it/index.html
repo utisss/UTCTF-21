@@ -1,0 +1,71 @@
+<!DOCTYPE html> 
+<html> 
+    <head> 
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/md5.js"></script>
+      <script src="assets/js/main.js"></script>
+        <script> 
+         
+            function checkPassword(form) { 
+                password1 = form.password1.value; 
+                name = form.name.value;
+                var username = "admin";
+                var hash = "1bea3a3d4bc3be1149a75b33fb8d82bc"; 
+                var hashedPasswd = CryptoJS.MD5(password1);
+   
+                if (password1 == '') 
+                    alert ("Please enter Password"); 
+              
+                else if (username != name) { 
+                    alert ("\nYou lack access privlages...") 
+                    return false; 
+                }
+                     
+                else if (hash != hashedPasswd) { 
+                    alert ("\nIncorrect password...") 
+                    return false; 
+                } 
+  
+                else{ 
+                    alert("Access Granted\n" + text) 
+                    return true; 
+                } 
+            } 
+        </script> 
+        <style> 
+            .gfg { 
+                font-size:40px; 
+                color:orange; 
+                font-weight:bold; 
+                text-align:center; 
+            } 
+            .greeting { 
+                font-size:17px; 
+                text-align:center; 
+                margin-bottom:20px; 
+            } 
+        </style> 
+    </head> 
+    <body> 
+        <div class = "gfg">Welcome</div> 
+        <div class = "greeting">I've implemented an "interesting" form of security. Take a look.</div> 
+        <form onSubmit = "return checkPassword(this)"> 
+        <table border = 1 align = "center"> 
+            <tr> 
+                <!-- Enter Username -->
+                <td>Username:</td> 
+                <td><input type = text name = name size = 25</td> 
+            </tr> 
+            <tr> 
+                <!-- Enter Password. -->
+                <td>Password:</td> 
+                <td><input type = password name = password1 size = 25</td> 
+            </tr> 
+            <tr> 
+                <td colspan = 2 align = right> 
+                <input type = submit value = "Submit"></td> 
+            </tr> 
+        </table> 
+        </form> 
+    </body> 
+</html>  
