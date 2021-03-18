@@ -1,0 +1,8 @@
+version: "3.7"
+
+services:
+  web:
+    build: .
+    ports:
+      - 4270:5000
+    read_only: true
